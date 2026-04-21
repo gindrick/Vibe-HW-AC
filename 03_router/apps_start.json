@@ -1,0 +1,21 @@
+[
+  {
+    "name": "react_assistant",
+    "type": "ps1",
+    "start": "../react_assistant/start-services.ps1",
+    "cwd": "C:/jja/react_assistant"
+  },
+  {
+    "name": "hr_dashboard",
+    "type": "uvicorn",
+    "module": "server:app",
+    "port": 8003,
+    "cwd": "C:/jja/hr_demo"
+  },
+  {
+    "name": "hr_hiring",
+    "type": "ps1",
+    "start": "../dashboards/hr_hiring/scripts/start-native.ps1",
+    "cwd": "C:/jja/dashboards/hr_hiring"
+  }
+]
