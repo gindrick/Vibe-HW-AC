@@ -1,0 +1,50 @@
+[
+  {
+    "path": "react_assistant",
+    "target": "http://localhost:8001",
+    "strip_prefix": false,
+    "description": "React Assistant — ReAct agent, SharePoint vyhledávání"
+  },
+  {
+    "path": "hr_demo",
+    "target": "http://localhost:8003",
+    "strip_prefix": false,
+    "description": "HR Demo — webové utility a nástroje"
+  },
+  {
+    "path": "hr_hiring",
+    "target": "http://localhost:5173",
+    "strip_prefix": false,
+    "description": "HR Hiring Frontend SPA"
+  },
+  {
+    "path": "hr_hiring_api",
+    "target": "http://localhost:8010",
+    "strip_prefix": true,
+    "description": "HR Hiring Backend API"
+  },
+  {
+    "path": "production_cards",
+    "target": "http://localhost:5174",
+    "strip_prefix": false,
+    "description": "Production Cards Frontend SPA"
+  },
+  {
+    "path": "production_cards_api",
+    "target": "http://localhost:8011",
+    "strip_prefix": true,
+    "description": "Production Cards Backend API"
+  },
+  {
+    "path": "production_cards_2",
+    "target": "http://localhost:5175",
+    "strip_prefix": false,
+    "description": "Production Cards 2 Frontend SPA (Agent SDK demo)"
+  },
+  {
+    "path": "production_cards_2_api",
+    "target": "http://localhost:8012",
+    "strip_prefix": true,
+    "description": "Production Cards 2 Backend API"
+  }
+]

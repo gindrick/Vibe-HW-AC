@@ -1,0 +1,69 @@
+model_list:
+  # RunPod vLLM Models
+  - model_name: runpod-vllm-mistral
+    litellm_params:
+      model: hosted_vllm/mistralai/Mistral-7B-Instruct-v0.3
+      api_base: "os.environ/RUNPOD_API_BASE"
+      api_key: none
+
+  # OpenAI Models
+  - model_name: llm-default
+    litellm_params:
+      model: openai/gpt-4o-mini
+      api_key: "os.environ/OPENAI_API_KEY"
+  - model_name: oai-gpt-5-nano
+    litellm_params:
+      model: openai/gpt-5-nano
+      api_key: "os.environ/OPENAI_API_KEY"
+  - model_name: oai-gpt-4.1-nano
+    litellm_params:
+      model: openai/gpt-4.1-nano
+      api_key: "os.environ/OPENAI_API_KEY"
+  - model_name: oai-text-embedding-3-small
+    litellm_params:
+      model: openai/text-embedding-3-small
+      api_key: "os.environ/OPENAI_API_KEY"
+
+  # Anthropic Models
+  - model_name: anthropic-claude-sonnet-4
+    litellm_params:
+      model: anthropic/claude-sonnet-4-20250514
+      api_key: "os.environ/ANTHROPIC_API_KEY"
+
+  # Gemini Models
+  - model_name: gemini-2.0-flash
+    litellm_params:
+      model: gemini/gemini-2.0-flash
+      api_key: "os.environ/GEMINI_API_KEY"
+
+  # Ollama Models (local, native)
+  - model_name: ollama-mistral-7b
+    litellm_params:
+      model: ollama/mistral:7b
+      api_base: "os.environ/OLLAMA_API_BASE"
+      api_key: none
+  - model_name: ollama-qwen2.5-3b
+    litellm_params:
+      model: ollama/qwen2.5:3b
+      api_base: "os.environ/OLLAMA_API_BASE"
+      api_key: none
+  - model_name: ollama-qwen2.5-1.5b
+    litellm_params:
+      model: ollama/qwen2.5:1.5b
+      api_base: "os.environ/OLLAMA_API_BASE"
+      api_key: none
+  - model_name: ollama-llama3.2-3b
+    litellm_params:
+      model: ollama/llama3.2:3b
+      api_base: "os.environ/OLLAMA_API_BASE"
+      api_key: none
+  - model_name: ollama-phi3-mini
+    litellm_params:
+      model: ollama/phi3:mini
+      api_base: "os.environ/OLLAMA_API_BASE"
+      api_key: none
+
+general_settings:
+  master_key: "os.environ/LITELLM_MASTER_KEY"
+  store_model_in_db: true
+  store_prompts_in_spend_logs: true
