@@ -24,6 +24,7 @@ logs/
 
 # ── Uploads / uživatelská data ───────────────────────────────────────────────
 production_cards/2_backend/storage/uploads/
+production_cards_2/2_backend/storage/uploads/
 
 # ── Databáze ────────────────────────────────────────────────────────────────
 *.db

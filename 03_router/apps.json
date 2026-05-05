@@ -34,5 +34,17 @@
     "target": "http://localhost:8011",
     "strip_prefix": true,
     "description": "Production Cards Backend API"
+  },
+  {
+    "path": "production_cards_2",
+    "target": "http://localhost:5175",
+    "strip_prefix": false,
+    "description": "Production Cards 2 Frontend SPA"
+  },
+  {
+    "path": "production_cards_2_api",
+    "target": "http://localhost:8012",
+    "strip_prefix": true,
+    "description": "Production Cards 2 Backend API"
   }
 ]
