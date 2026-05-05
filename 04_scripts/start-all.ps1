@@ -50,6 +50,7 @@ Import-EnvFile "$root\01_mcp\.env"
 # Backend .env sa načíta s Force — prekoná prípadné systémové premenné (napr. MSSQL_USER=sa)
 Import-EnvFile "$root\hr_hiring\2_backend\.env" -Force
 Import-EnvFile "$root\production_cards\2_backend\.env" -Force
+Import-EnvFile "$root\production_cards_2\2_backend\.env" -Force
 
 # --- Pomocná funkce pro spuštění služby na pozadí ---
 # Každá služba dostane vlastní log soubor. Starý log se při startu přepíše.
@@ -124,6 +125,16 @@ Start-Service-Background `
     -WorkDir "$root\production_cards\3_frontend" `
     -Command "& 'C:\tools\node20\node.exe' .\node_modules\vite\bin\vite.js --host 0.0.0.0 --port 5174"
 
+Start-Service-Background `
+    -Name "production-cards-2-backend" `
+    -WorkDir "$root\production_cards_2\2_backend" `
+    -Command "& '$root\production_cards_2\2_backend\.venv\Scripts\python.exe' -m uvicorn app.main:app --host 0.0.0.0 --port 8012"
+
+Start-Service-Background `
+    -Name "production-cards-2-frontend" `
+    -WorkDir "$root\production_cards_2\3_frontend" `
+    -Command "& 'C:\tools\node20\node.exe' .\node_modules\vite\bin\vite.js --host 0.0.0.0 --port 5175"
+
 Write-Host ""
 Write-Host "Všechny služby spuštěny na pozadí (bez oken)."
 Write-Host ""
@@ -137,5 +148,7 @@ Write-Host "  8010 - HR Hiring backend"
 Write-Host "  5173 - HR Hiring frontend (dev)"
 Write-Host "  8011 - Production Cards backend"
 Write-Host "  5174 - Production Cards frontend (dev)"
+Write-Host "  8012 - Production Cards 2 backend"
+Write-Host "  5175 - Production Cards 2 frontend (dev)"
 Write-Host ""
 Write-Host "Logy: $logDir\"

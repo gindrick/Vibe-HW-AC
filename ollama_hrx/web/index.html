@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>KB Chat</title>
+  <link rel="stylesheet" href="/web/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="dot" title="server running"></div>
+        <div>
+          <h1>KB Chat (POC)</h1>
+          <div class="meta">md-only · RAG · lokálně</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="label">Model</div>
+        <div style="margin-top:6px; font-size:13px;">
+          <b id="modelName"></b>
+        </div>
+        <div class="small" style="margin-top:8px;">
+          TOP_K: <b id="topK"></b> · MIN_SCORE: <b id="minScore"></b><br/>
+          Zdroj: <b>kb/</b>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="row" style="justify-content: space-between;">
+          <div>
+            <div class="label">Režim odpovědi</div>
+            <div class="small">Ovlivní styl generování.</div>
+          </div>
+        </div>
+        <div style="margin-top:10px;">
+          <select id="mode">
+            <option value="normal">Normální</option>
+            <option value="3_sentences">Max 3 věty</option>
+            <option value="quotes_only">Pouze citace</option>
+          </select>
+        </div>
+        <div class="row" style="margin-top:10px;">
+          <button class="ghost" onclick="reloadIndex()">Reload index</button>
+          <button class="ghost" onclick="clearChat()">Vymazat chat</button>
+        </div>
+        <div class="small" style="margin-top:10px;">
+          Odeslat: <span class="kbd">Enter</span> · Nový řádek: <span class="kbd">Shift</span>+<span class="kbd">Enter</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="label">Tip</div>
+        <div class="small" style="margin-top:8px;">
+          Ptej se konkrétně. Když info v KB není, asistent řekne „nemám informace“.
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="title">
+          <b>Knowledge Base Assistant</b>
+          <span class="small">Odpovědi pouze z interních .md souborů</span>
+        </div>
+        <div class="pill" id="statusPill">Stav: <strong id="statusText">Ready</strong></div>
+      </div>
+
+      <div class="chat" id="chat"></div>
+
+      <div class="composer">
+        <div class="box">
+          <textarea id="q" placeholder="Napiš dotaz…"></textarea>
+          <div class="actions">
+            <button class="ghost" onclick="insertExample()">Příklad</button>
+            <button class="send" onclick="send()">Odeslat</button>
+          </div>
+        </div>
+        <div class="hint">
+          <span>POC · žádná data se neposílají mimo Ollama model</span>
+          <span class="small">v1</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+<script src="/web/app.js" defer></script>
+</body>
+</html>

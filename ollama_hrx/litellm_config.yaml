@@ -1,0 +1,49 @@
+model_list:
+  # GEMINI Models
+  - model_name: gemini-1.5-flash
+    litellm_params:
+      model: gemini/gemini-1.5-flash
+      api_key: os.environ/GEMINI_API_KEY
+  - model_name: gemini-1.5-pro
+    litellm_params:
+      model: gemini/gemini-1.5-pro
+      api_key: os.environ/GEMINI_API_KEY
+  - model_name: gemini-2.0-flash-exp
+    litellm_params:
+      model: gemini/gemini-2.0-flash-exp
+      api_key: os.environ/GEMINI_API_KEY
+  # RUN POD VLLM Models
+  - model_name: runpod-vllm-mistral
+    litellm_params:
+      model: hosted_vllm/mistralai/Mistral-7B-Instruct-v0.3
+      api_base: https://gnfzhaynntlve2-8080.proxy.runpod.net/v1
+      api_key: none
+  # OPENAI Models
+  - model_name: oai-gpt-4.1-nano
+    litellm_params:
+      model: openai/gpt-4.1-nano
+      api_key: none
+  - model_name: oai-text-embedding-3-small
+    litellm_params:
+      model: openai/text-embedding-3-small
+      api_key: none
+  # Anthropic Models
+  - model_name: anthropic-claude-sonnet-4
+    litellm_params:
+      model: anthropic/claude-sonnet-4-20250514
+      api_key: none
+  # Ollama Models
+  - model_name: gpt-oss:20b
+    litellm_params:
+      model: ollama/gpt-oss:20b
+      api_base: http://192.168.2.114:11434
+      api_key: none
+  - model_name: ollama-mistral:7b
+    litellm_params:
+      model: ollama/mistral:7b
+      api_base: http://192.168.2.114:11434
+      api_key: none
+
+general_settings:
+  store_model_in_db: true
+  store_prompts_in_spend_logs: true

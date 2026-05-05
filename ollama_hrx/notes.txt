@@ -1,0 +1,6 @@
+FAQ
+http://192.168.41.43:8000/
+
+
+neural-chat:7b
+mistral:7b

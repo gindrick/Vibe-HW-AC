@@ -1,0 +1,20 @@
+[
+  {
+    "source_id": "finance_cs",
+    "site_url": "https://contoso.sharepoint.com/sites/FinanceCZ",
+    "drive_name": "Documents",
+    "folder_path": "Shared Documents/Invoices/2026",
+    "source_dir": "./data/sharepoint/finance_cs",
+    "allowed_aad_groups": ["Finance-Team", "CFO-Office"],
+    "enabled": true
+  },
+  {
+    "source_id": "hr_global",
+    "site_url": "https://contoso.sharepoint.com/sites/HRGlobal",
+    "drive_name": "Documents",
+    "folder_path": "Policies",
+    "source_dir": "./data/sharepoint/hr_global",
+    "allowed_aad_groups": ["HR-Team"],
+    "enabled": true
+  }
+]

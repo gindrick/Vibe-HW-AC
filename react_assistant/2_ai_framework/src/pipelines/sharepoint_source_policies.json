@@ -1,0 +1,7 @@
+{
+  "default": [
+    "SharePoint Connection CS Members",
+    "SharePoint Connection CS Owners",
+    "SharePoint Connection CS Visitors"
+  ]
+}

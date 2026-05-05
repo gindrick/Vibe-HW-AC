@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICT Datový specialista — Výběr kandidátů</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111827'/%3E%3Cpath d='M14 20h36v4H14zM14 30h36v4H14zM14 40h22v4H14z' fill='%2338bdf8'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F3EE;
+    --surface: #FDFCFA;
+    --surface2: #EFEDE8;
+    --ink: #1A1916;
+    --ink2: #6B6860;
+    --ink3: #A8A69F;
+    --accent: #2D5F4F;
+    --accent-light: #E1EDE9;
+    --accent2: #B85C2A;
+    --accent2-light: #F5E8DF;
+    --amber: #C4872A;
+    --amber-light: #FAF0DC;
+    --border: rgba(26,25,22,0.10);
+    --border2: rgba(26,25,22,0.06);
+    --shadow: 0 2px 16px rgba(26,25,22,0.07);
+    --shadow-lg: 0 8px 40px rgba(26,25,22,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--ink);
+    color: #F5F3EE;
+    padding: 2.5rem 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    right: -60px; top: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    right: 80px; bottom: -100px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+  .header-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+  .header-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
+  .header-label {
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(245,243,238,0.45); margin-bottom: 0.5rem; font-weight: 500;
+  }
+  .header-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: #F5F3EE;
+  }
+  .header-title em { font-style: italic; color: rgba(245,243,238,0.55); }
+  .header-meta {
+    display: flex; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap;
+  }
+  .meta-item { display: flex; flex-direction: column; gap: 2px; }
+  .meta-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(245,243,238,0.4); }
+  .meta-value { font-size: 13px; color: rgba(245,243,238,0.85); font-weight: 500; }
+  .header-stats { display: flex; gap: 1rem; align-items: center; }
+  .stat-pill {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 100px;
+    padding: 0.4rem 1rem;
+    font-size: 12px;
+    color: rgba(245,243,238,0.7);
+    white-space: nowrap;
+  }
+  .stat-pill strong { color: #F5F3EE; font-weight: 600; }
+
+  /* USER SECTION */
+  .user-section {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.35rem 0.35rem 0.35rem 0.5rem;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 100px;
+  }
+  .user-avatar {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(56,189,248,0.2);
+    border: 1px solid rgba(56,189,248,0.35);
+    color: #7dd3fc;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+  .user-info { display: flex; flex-direction: column; gap: 1px; }
+  .user-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(245,243,238,0.3); line-height: 1; }
+  .user-name { font-size: 12px; font-weight: 500; color: rgba(245,243,238,0.9); line-height: 1.3; }
+  .logout-btn {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(245,243,238,0.6);
+    padding: 0.4rem 0.85rem;
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .logout-btn:hover {
+    background: rgba(255,255,255,0.18);
+    color: #F5F3EE;
+    border-color: rgba(255,255,255,0.25);
+  }
+
+  /* PRIORITY BAR */
+  .priority-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0.9rem 3rem;
+  }
+  .priority-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .priority-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink3); font-weight: 500; }
+  .priority-list { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .priority-item {
+    display: flex; align-items: center; gap: 0.4rem;
+    font-size: 12px; color: var(--ink2);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 0.25rem 0.75rem;
+  }
+  .priority-num {
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--ink); color: var(--bg);
+    font-size: 9px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* MAIN */
+  main { max-width: 1200px; margin: 0 auto; padding: 2rem 3rem 4rem; }
+
+  /* FILTERS */
+  .filters {
+    display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; align-items: center;
+  }
+  .filter-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    background: var(--surface);
+    color: var(--ink2);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-weight: 500;
+  }
+  .filter-btn:hover { background: var(--surface2); color: var(--ink); }
+  .filter-btn.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .filter-sep { width: 1px; height: 20px; background: var(--border); margin: 0 0.25rem; }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  /* CANDIDATE CARD */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+  .card.featured {
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-light);
+  }
+  .card.hidden { display: none; }
+
+  .card-top {
+    padding: 1.25rem 1.25rem 1rem;
+    border-bottom: 1px solid var(--border2);
+  }
+  .card-badge-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; }
+  .badge {
+    font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 0.25rem 0.6rem; border-radius: 100px;
+  }
+  .badge-best { background: var(--accent-light); color: var(--accent); }
+  .badge-strong { background: var(--amber-light); color: var(--amber); }
+  .badge-potential { background: #EEF2FF; color: #3B4FA3; }
+  .badge-weak { background: var(--surface2); color: var(--ink3); }
+  .tb-num { font-size: 10px; color: var(--ink3); font-weight: 500; }
+
+  .candidate-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 0.2rem;
+  }
+  .candidate-sub { font-size: 12px; color: var(--ink2); }
+
+  .card-body { padding: 1rem 1.25rem; flex: 1; }
+
+  /* SCORE BARS */
+  .scores { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 1rem; }
+  .score-row { display: flex; align-items: center; gap: 0.6rem; }
+  .score-label { font-size: 11px; color: var(--ink2); width: 130px; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .score-track {
+    flex: 1; height: 5px; background: var(--surface2);
+    border-radius: 100px; overflow: hidden;
+  }
+  .score-fill {
+    height: 100%; border-radius: 100px;
+    transition: width 0.6s cubic-bezier(.4,0,.2,1);
+  }
+  .score-fill.full { background: var(--accent); }
+  .score-fill.partial { background: var(--amber); }
+  .score-fill.low { background: var(--surface2); width: 8% !important; }
+  .score-val { font-size: 10px; color: var(--ink3); width: 24px; text-align: right; flex-shrink: 0; }
+
+  /* TAGS */
+  .tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.75rem; }
+  .tag {
+    font-size: 10px; padding: 0.2rem 0.5rem;
+    background: var(--surface2); color: var(--ink2);
+    border-radius: 4px; border: 1px solid var(--border);
+    font-weight: 500;
+  }
+  .tag.highlight { background: var(--accent-light); color: var(--accent); border-color: transparent; }
+  .tag.warn { background: var(--accent2-light); color: var(--accent2); border-color: transparent; }
+
+  /* NOTE */
+  .card-note {
+    font-size: 11.5px; color: var(--ink2); line-height: 1.55;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border2);
+  }
+
+  /* CARD FOOTER */
+  .card-footer {
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid var(--border2);
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--surface2);
+  }
+  .salary { font-size: 12px; font-weight: 600; color: var(--ink); }
+  .avail { font-size: 11px; color: var(--ink3); }
+
+  /* DETAIL MODAL */
+  .overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(26,25,22,0.55);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    backdrop-filter: blur(2px);
+  }
+  .overlay.open { display: flex; }
+  .modal {
+    background: var(--surface);
+    border-radius: 20px;
+    max-width: 680px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.25s ease;
+  }
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  .modal-header {
+    padding: 1.5rem 1.75rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: flex-start;
+    position: sticky; top: 0; background: var(--surface); z-index: 1;
+    border-radius: 20px 20px 0 0;
+  }
+  .modal-close {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--surface2); border: none; cursor: pointer;
+    font-size: 18px; line-height: 1; color: var(--ink2);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s;
+    flex-shrink: 0;
+  }
+  .modal-close:hover { background: var(--border); }
+  .modal-body { padding: 1.5rem 1.75rem; }
+  .modal-section { margin-bottom: 1.5rem; }
+  .modal-section-title {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--ink3); font-weight: 600; margin-bottom: 0.75rem;
+  }
+  .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .detail-item { display: flex; flex-direction: column; gap: 2px; }
+  .detail-label { font-size: 11px; color: var(--ink3); }
+  .detail-value { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .pros-list, .cons-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+  .pros-list li::before { content: '✓ '; color: var(--accent); font-weight: 700; }
+  .cons-list li::before { content: '△ '; color: var(--amber); font-weight: 700; }
+  .pros-list li, .cons-list li { font-size: 12.5px; color: var(--ink2); line-height: 1.5; }
+  .verdict-box {
+    background: var(--accent-light);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    font-size: 13px;
+    color: var(--accent);
+    line-height: 1.6;
+  }
+  .verdict-box.amber { background: var(--amber-light); border-color: var(--amber); color: #7A5015; }
+  .verdict-box.gray { background: var(--surface2); border-color: var(--border); color: var(--ink2); }
+
+  /* SUMMARY ROW */
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+  }
+  .sum-item { text-align: center; }
+  .sum-num { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--ink); }
+  .sum-label { font-size: 11px; color: var(--ink3); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  @media (max-width: 700px) {
+    header, main, .priority-bar { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .grid { grid-template-columns: 1fr; }
+    .pros-cons, .detail-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-top">
+      <div>
+        <div class="header-label">Výběrové řízení · 2026</div>
+        <h1 class="header-title">ICT Datový <em>specialista</em></h1>
+      </div>
+      <div style="display: flex; gap: 2rem; align-items: center;">
+        <div class="header-stats">
+          <div class="stat-pill"><strong id="total-count">4</strong> kandidátů</div>
+          <div class="stat-pill"><strong>1</strong> doporučený</div>
+        </div>
+        <div class="user-section" id="user-section" style="display: none;">
+          <div class="user-avatar" id="user-avatar"></div>
+          <div class="user-info">
+            <span class="user-label">Přihlášen</span>
+            <span class="user-name" id="user-name"></span>
+          </div>
+          <a href="/dashboard/auth/logout" class="logout-btn">Odhlásit ↗</a>
+        </div>
+      </div>
+    </div>
+    <div class="header-meta">
+      <div class="meta-item">
+        <span class="meta-label">Priorita #1</span>
+        <span class="meta-value">ERP znalost (D365/BC)</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Priorita #2</span>
+        <span class="meta-value">Master data & Governance</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Priorita #3</span>
+        <span class="meta-value">SQL / Python / ETL</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Priorita #4</span>
+        <span class="meta-value">Azure / Cloud stack</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="priority-bar">
+  <div class="priority-inner">
+    <span class="priority-label">Must have:</span>
+    <div class="priority-list">
+      <span class="priority-item"><span class="priority-num">1</span>SQL pokročilá úroveň</span>
+      <span class="priority-item"><span class="priority-num">2</span>Python / ETL</span>
+      <span class="priority-item"><span class="priority-num">3</span>ERP datové struktury</span>
+      <span class="priority-item"><span class="priority-num">4</span>Master data management</span>
+      <span class="priority-item"><span class="priority-num">5</span>Data governance</span>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="summary-row">
+    <div class="sum-item">
+      <div class="sum-num" id="cnt-all">4</div>
+      <div class="sum-label">Celkem kandidátů</div>
+    </div>
+    <div class="sum-item">
+      <div class="sum-num" style="color:var(--accent)">1</div>
+      <div class="sum-label">Nejlepší shoda</div>
+    </div>
+    <div class="sum-item">
+      <div class="sum-num" style="color:var(--amber)">2</div>
+      <div class="sum-label">Částečná shoda</div>
+    </div>
+    <div class="sum-item">
+      <div class="sum-num" style="color:var(--ink3)">1</div>
+      <div class="sum-label">Nevhodný</div>
+    </div>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterCards('all', this)">Všichni</button>
+    <button class="filter-btn" onclick="filterCards('best', this)">Nejlepší shoda</button>
+    <button class="filter-btn" onclick="filterCards('strong', this)">Částečná shoda</button>
+    <div class="filter-sep"></div>
+    <button class="filter-btn" onclick="filterCards('erp', this)">Má ERP</button>
+    <button class="filter-btn" onclick="filterCards('azure', this)">Má Azure</button>
+    <button class="filter-btn" onclick="filterCards('governance', this)">Má Governance</button>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <!-- MICHAL NOVÁK -->
+    <div class="card featured" data-cat="best" data-tags="erp governance azure"
+         onclick="openModal('novak')">
+      <div class="card-top">
+        <div class="card-badge-row">
+          <span class="badge badge-best">⭐ Nejlepší shoda</span>
+          <span class="tb-num">TB: 52 271</span>
+        </div>
+        <div class="candidate-name">Ing. Michal Novák</div>
+        <div class="candidate-sub">Data Engineer · BI Analytik · DWH</div>
+      </div>
+      <div class="card-body">
+        <div class="scores">
+          <div class="score-row">
+            <span class="score-label">1. ERP znalost</span>
+            <div class="score-track"><div class="score-fill full" style="width:100%"></div></div>
+            <span class="score-val">●●●</span>
+          </div>
+          <div class="score-row">
+            <span class="score-label">2. Master data / Gov.</span>
+            <div class="score-track"><div class="score-fill full" style="width:100%"></div></div>
+            <span class="score-val">●●●</span>
+          </div>
+          <div class="score-row">
+            <span class="score-label">3. SQL / Python / ETL</span>
+            <div class="score-track"><div class="score-fill partial" style="width:72%"></div></div>
+            <span class="score-val">●●◐</span>
+          </div>
+          <div class="score-row">
+            <span class="score-label">4. Azure / Cloud</span>
+            <div class="score-track"><div class="score-fill partial" style="width:45%"></div></div>
+            <span class="score-val">●◐○</span>
+          </div>
+        </div>
+        <div class="tags">
+          <span class="tag highlight">D365 BC ✓</span>
+          <span class="tag highlight">Helios / ABRA</span>
+          <span class="tag highlight">Data Governance</span>
+          <span class="tag">Azure Fabric</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">ETL/SSIS</span>
+          <span class="tag warn">Python junior</span>
+          <span class="tag warn">EN 3/5</span>
+        </div>
+        <div class="card-note">15+ let jako ERP developer a analytik. Kurzy Azure Fabric a Data Governance v roce 2025. Hledá stabilní HPP po ukončení projektu.</div>
+      </div>
+      <div class="card-footer">
+        <span class="salary">~90 000 CZK · jednatelné</span>
+        <span class="avail">Nástup dohodou</span>
+      </div>
+    </div>
+
+    <!-- VOJTĚCH KUCHAŘ -->
+    <div class="card" data-cat="strong" data-tags="azure"
+         onclick="openModal('kuchar')">
+      <div class="card-top">
+        <div class="card-badge-row">
+          <span class="badge badge-strong">Silný tech profil</span>
+          <span class="tb-num">TB: 52 268</span>
+        </div>
+        <div class="candidate-name">Vojtěch Kuchař</div>
+        <div class="candidate-sub">Data Engineer · Azure specialist</div>
+      </div>
+      <div class="card-body">
+        <div class="scores">
+          <div class="score-row">
+            <span class="score-label">1. ERP znalost</span>
+            <div class="score-track"><div class="score-fill low" style="width:5%"></div></div>
+            <span class="score-val">○○○</span>
+          </div>
+          <div class="score-row">
+            <span class="score-label">2. Master data / Gov.</span>
+            <div class="score-track"><div class="score-fill partial" style="width:25%"></div></div>
+            <span class="score-val">◐○○</span>
+          </div>
+          <div class="score-row">
+            <span class="score-label">3. SQL / Python / ETL</span>
+            <div class="score-track"><div class="score-fill full" style="width:100%"></div></div>
+            <span class="score-val">●●●</span>
+          </div>
+          <div class="score-row">
+            <span class="score-label">4. Azure / Cloud</span>
+            <div class="score-track"><div class="score-fill full" style="width:100%"></div></div>
+            <span class="score-val">●●●</span>
+          </div>
+        </div>
+        <div class="tags">
+          <span class="tag highlight">Python / PySpark</span>
+          <span class="tag highlight">Databricks</span>
+          <span class="tag highlight">Azure Data Factory</span>
+          <span class="tag highlight">Power BI</span>
+          <span class="tag">Snowflake</span>
+          <span class="tag">DBT</span>
+          <span class="tag warn">Bez ERP zkušenosti</span>
+          <span class="tag warn">Bez governance</span>
+        </div>
+        <div class="card-note">Technicky nejsilnější kandidát na cloudový stack. Chybí ERP a governance — klíčové priority pozice. Odchází z důvodu propuštění.</div>
+      </div>
+      <div class="card-footer">
+        <span class="salary">77 000 CZK (současný příjem)</span>
+        <span class="avail">2 měs. výpověď</span>
+      </div>
+    </div>
+
+    <!-- VÁCLAV KRAJKÁŘ -->
+    <div class="card" data-cat="strong" data-tags="erp governance"
+         onclick="openModal('krajkar')">
+      <div class="card-top">
+        <div class="card-badge-row">
+          <span class="badge badge-potential">Potenciál</span>
+          <span class="tb-num">TB: 52 288</span>
+        </div>
+        <div class="candidate-name">Václav Krajkář</div>
+        <div class="candidate-sub">WMS & ERP specialista → Data</div>
+      </div>
+      <div class="card-body">
+        <div class="scores">
+          <div class="score-row">
+            <span class="score-label">1. ERP znalost</span>
+            <div class="score-track"><div class="score-fill partial" style="width:55%"></div></div>
+            <span class="score-val">●◐○</span>
+          </div>
+          <div class="score-row">
+            <span class="score-label">2. Master data / Gov.</span>
+            <div class="score-track"><div class="score-fill partial" style="width:50%"></div></div>
+            <span class="score-val">●◐○</span>
+          </div>
+          <div class="score-row">
+            <span class="score-label">3. SQL / Python / ETL</span>
+            <div class="score-track"><div class="score-fill partial" style="width:50%"></div></div>
+            <span class="score-val">●◐○</span>
+          </div>
+          <div class="score-row">
+            <span class="score-label">4. Azure / Cloud</span>
+            <div class="score-track"><div class="score-fill low" style="width:5%"></div></div>
+            <span class="score-val">○○○</span>
+          </div>
+        </div>
+        <div class="tags">
+          <span class="tag highlight">ERP Karat</span>
+          <span class="tag highlight">WMS senior</span>
+          <span class="tag highlight">Čistota dat</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Python (rozvíjí)</span>
+          <span class="tag">AI / LLM projekty</span>
+          <span class="tag warn">Přechází na datovou roli</span>
+        </div>
+        <div class="card-note">Silná ERP/WMS praxe, cit pro data quality. Python a SQL se teprve rozvíjejí. Nejnižší mzdový požadavek, chce růst.</div>
+      </div>
+      <div class="card-footer">
+        <span class="salary">od 42 000 CZK</span>
+        <span class="avail">2 měs. výpověď</span>
+      </div>
+    </div>
+
+    <!-- PAVEL KACHESOV -->
+    <div class="card" data-cat="weak" data-tags=""
+         onclick="openModal('kachesov')">
+      <div class="card-top">
+        <div class="card-badge-row">
+          <span class="badge badge-weak">Spíše nevhodný</span>
+          <span class="tb-num">TB: 52 300</span>
+        </div>
+        <div class="candidate-name">Pavel Kachesov</div>
+        <div class="candidate-sub">Lead IT Specialist · Junior analytik</div>
+      </div>
+      <div class="card-body">
+        <div class="scores">
+          <div class="score-row">
+            <span class="score-label">1. ERP znalost</span>
+            <div class="score-track"><div class="score-fill partial" style="width:20%"></div></div>
+            <span class="score-val">◐○○</span>
+          </div>
+          <div class="score-row">
+            <span class="score-label">2. Master data / Gov.</span>
+            <div class="score-track"><div class="score-fill low" style="width:5%"></div></div>
+            <span class="score-val">○○○</span>
+          </div>
+          <div class="score-row">
+            <span class="score-label">3. SQL / Python / ETL</span>
+            <div class="score-track"><div class="score-fill partial" style="width:55%"></div></div>
+            <span class="score-val">●◐○</span>
+          </div>
+          <div class="score-row">
+            <span class="score-label">4. Azure / Cloud</span>
+            <div class="score-track"><div class="score-fill low" style="width:5%"></div></div>
+            <span class="score-val">○○○</span>
+          </div>
+        </div>
+        <div class="tags">
+          <span class="tag">Python / SQL</span>
+          <span class="tag">REST API</span>
+          <span class="tag">Google Analytics</span>
+          <span class="tag">Looker Studio</span>
+          <span class="tag warn">Bez governance</span>
+          <span class="tag warn">Bez ERP hloubky</span>
+          <span class="tag warn">Junior profil</span>
+        </div>
+        <div class="card-note">Schopný junior, ale profil odpovídá spíše web analytikovi. Studuje VŠE, 23 let. Potenciál do budoucna — pro tuto pozici zatím nezralý.</div>
+      </div>
+      <div class="card-footer">
+        <span class="salary">od 60 000 CZK</span>
+        <span class="avail">2 měs. výpověď</span>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- MODALS -->
+<div class="overlay" id="overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal-content"></div>
+</div>
+
+<script>
+const modals = {
+  novak: {
+    name: 'Ing. Michal Novák',
+    sub: 'Data Engineer · BI Analytik · DWH',
+    tb: '52 271',
+    badge: '<span class="badge badge-best">⭐ Nejlepší shoda</span>',
+    verdict: 'best',
+    verdictText: 'Jednoznačně nejlepší shoda s pozicí. Jediný kandidát s přímou znalostí D365 BC a desetiletími ERP praxe. Data governance se aktivně vzdělává (2025). Slabší Python a angličtina jsou rozvijitelné. Hledá stabilní HPP — je motivovaný.',
+    details: [
+      { label: 'Současná pozice', value: 'Data Engineer / BI Analytik (AAA AUTO / RESULMATIC)' },
+      { label: 'Praxe celkem', value: '25+ let v IT, 5+ let na datových pozicích' },
+      { label: 'Mzdový požadavek', value: '~90 000 CZK (otevřen jednání)' },
+      { label: 'Nástup', value: 'Dohodou (ukončení projektu)' },
+      { label: 'Angličtina', value: '3/5 (pasivní znalost)' },
+      { label: 'Vzdělání', value: 'Ing. ČVUT Praha, Přístrojová technika' },
+    ],
+    pros: ['D365 Business Central — přímá zkušenost', 'Helios, ABRA — hluboká ERP znalost', 'ETL/SSIS, datové sklady DWH/OLAP', 'Data Governance kurz 2025', 'Azure Fabric, Power BI, DAX', 'Reference od přímého nadřízeného', 'SCRUM, Agile, Enterprise Architecture'],
+    cons: ['Python zatím junior úroveň', 'Angličtina 3/5 (slabší)', 'Mzdová expectace nejvyšší z kandidátů', 'Pracuje na IČO — hledá HPP přechod'],
+    tags: ['D365 BC', 'Helios', 'ABRA', 'ETL/SSIS', 'Data Governance', 'Azure Fabric', 'Power BI', 'DAX', 'SQL senior']
+  },
+  kuchar: {
+    name: 'Vojtěch Kuchař',
+    sub: 'Data Engineer · Azure Cloud Specialist',
+    tb: '52 268',
+    badge: '<span class="badge badge-strong">Silný tech profil</span>',
+    verdict: 'amber',
+    verdictText: 'Technicky excelentní na cloud/ETL stack, ale pro vaše priority nevhodný — chybí ERP i governance. Byl by ideální kandidát, pokud by ERP nebylo klíčové. Doporučeno zvážit pro budoucí cloud-first roli.',
+    details: [
+      { label: 'Současná pozice', value: 'Data Engineer (Stora Enso WP Ždírec)' },
+      { label: 'Praxe na datech', value: 'od 2021 (4+ roky)' },
+      { label: 'Současný příjem', value: '77 000 CZK' },
+      { label: 'Nástup', value: '2 měsíční výpověď' },
+      { label: 'Angličtina', value: '4/5 (pokročilá)' },
+      { label: 'Důvod odchodu', value: 'Firma propouští' },
+    ],
+    pros: ['Python/PySpark — vynikající úroveň', 'Databricks, Azure Data Factory, Snowflake', 'Power BI reporting', 'DBT data modeling', 'Azure Event Hub, Dataverse, Power Apps', 'Velmi příjemný komunikativní kandidát'],
+    cons: ['Žádná ERP zkušenost', 'Governance framework zcela chybí', 'Master data management — bez zkušenosti', 'Odchází z důvodu propouštění (ne vlastní iniciativa)'],
+    tags: ['Python/PySpark', 'Databricks', 'Azure DF', 'Snowflake', 'Power BI', 'DBT', 'Azure']
+  },
+  krajkar: {
+    name: 'Václav Krajkář',
+    sub: 'WMS & ERP Specialista → Datová role',
+    tb: '52 288',
+    badge: '<span class="badge badge-potential">Potenciál</span>',
+    verdict: 'amber',
+    verdictText: 'Zajímavý profil s reálnou ERP/WMS praxí a citem pro data quality. Python a SQL se teprve rozvíjejí — jde o mid-junior úroveň. Vhodný jako podpora týmu nebo pro roli s delší onboarding dobou. Nejnižší mzdový požadavek.',
+    details: [
+      { label: 'Současná pozice', value: 'WMS & Integrace Specialista (Showdown Displays)' },
+      { label: 'Praxe celkem', value: 'od 2017 (8+ let v logistice/systémech)' },
+      { label: 'Mzdový požadavek', value: 'od 42 000 CZK' },
+      { label: 'Nástup', value: '2 měsíční výpověď' },
+      { label: 'Angličtina', value: '4/5 (C1)' },
+      { label: 'Důvod změny', value: 'Chce přejít na datovou pozici' },
+    ],
+    pros: ['ERP Karat — seniorní znalost', 'WMS datové struktury — hloubková znalost', 'Čistota dat, deduplikace, data quality', 'AI/LLM projekty (LangChain, Ollama)', 'TypeScript, React — frontendové skills', 'Nejnižší mzdový požadavek'],
+    cons: ['Python a SQL rozvíjející se úroveň', 'Žádný Azure/cloud stack', 'Přechází teprve na datovou roli', 'Governance pouze konceptuálně', 'Bez D365/BC zkušenosti'],
+    tags: ['ERP Karat', 'WMS', 'Data quality', 'Python (rozvíjí)', 'SQL', 'AI/LLM', 'TypeScript']
+  },
+  kachesov: {
+    name: 'Pavel Kachesov',
+    sub: 'Lead IT Specialist · Junior Data Analytik',
+    tb: '52 300',
+    badge: '<span class="badge badge-weak">Spíše nevhodný</span>',
+    verdict: 'gray',
+    verdictText: 'Schopný junior s dobrou technickou základnou, ale profil neodpovídá požadavkům pozice. Chybí ERP hloubka, governance i cloud stack. Vhodný pro juniorní analytickou nebo webovou roli — tato pozice je pro něj zatím příliš senior.',
+    details: [
+      { label: 'Současná pozice', value: 'Lead IT Specialist (CANNA B2B s.r.o.)' },
+      { label: 'Věk / vzdělání', value: '23 let, VŠE Praha (studuje)' },
+      { label: 'Mzdový požadavek', value: 'od 60 000 CZK' },
+      { label: 'Nástup', value: '2 měsíční výpověď' },
+      { label: 'Angličtina', value: '4/5 (C1), ruština C2' },
+      { label: 'Důvod změny', value: 'Chce technický růst' },
+    ],
+    pros: ['Python, SQL, Pandas — solidní junior', 'REST API, XML integrace', 'Google Analytics, Looker Studio', 'Leadership zkušenost (vede tým 2)', 'Vícejazyčný (CZ, EN, RU)'],
+    cons: ['ERP znalost pouze uživatelská (migrace K2)', 'Žádná data governance zkušenost', 'Žádný Azure/cloud stack', 'Profil spíše web analytik / webmaster', 'Junior úroveň pro tuto pozici'],
+    tags: ['Python', 'SQL', 'Pandas', 'REST API', 'GA4', 'Looker Studio', 'Docker', 'Git']
+  }
+};
+
+function openModal(id) {
+  const d = modals[id];
+  const verdictClass = d.verdict === 'best' ? '' : d.verdict === 'amber' ? ' amber' : ' gray';
+  document.getElementById('modal-content').innerHTML = `
+    <div class="modal-header">
+      <div>
+        ${d.badge}
+        <h2 style="font-family:'DM Serif Display',serif;font-size:1.5rem;font-weight:400;margin-top:0.5rem">${d.name}</h2>
+        <p style="font-size:13px;color:var(--ink2);margin-top:2px">${d.sub} · <span style="color:var(--ink3)">TB: ${d.tb}</span></p>
+      </div>
+      <button class="modal-close" onclick="closeModal(null, true)">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-section-title">Verdikt</div>
+        <div class="verdict-box${verdictClass}">${d.verdictText}</div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Detail</div>
+        <div class="detail-grid">
+          ${d.details.map(i => `<div class="detail-item"><span class="detail-label">${i.label}</span><span class="detail-value">${i.value}</span></div>`).join('')}
+        </div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Silné stránky & Rizika</div>
+        <div class="pros-cons">
+          <div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:.5rem;font-weight:600">Silné stránky</div>
+            <ul class="pros-list">${d.pros.map(p => `<li>${p}</li>`).join('')}</ul>
+          </div>
+          <div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--amber);margin-bottom:.5rem;font-weight:600">Rizika / Mezery</div>
+            <ul class="cons-list">${d.cons.map(c => `<li>${c}</li>`).join('')}</ul>
+          </div>
+        </div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Technologie</div>
+        <div class="tags">${d.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+      </div>
+    </div>
+  `;
+  document.getElementById('overlay').classList.add('open');
+}
+
+function closeModal(e, force) {
+  if (force || (e && e.target === document.getElementById('overlay'))) {
+    document.getElementById('overlay').classList.remove('open');
+  }
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(null, true); });
+
+async function loadUserInfo() {
+  try {
+    const resp = await fetch('/dashboard/api/me');
+    const data = await resp.json();
+    if (data.authenticated && data.user) {
+      const name = data.user.name || '';
+      document.getElementById('user-name').textContent = name;
+      const initials = name.split('.').map(p => p[0]?.toUpperCase() || '').slice(0,2).join('')
+        || name.slice(0,2).toUpperCase();
+      document.getElementById('user-avatar').textContent = initials;
+      document.getElementById('user-section').style.display = 'flex';
+    }
+  } catch (e) {
+    console.error('Failed to load user info:', e);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadUserInfo);
+
+function filterCards(type, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.card').forEach(card => {
+    const cat = card.dataset.cat;
+    const tags = card.dataset.tags || '';
+    if (type === 'all') card.classList.remove('hidden');
+    else if (type === 'best') card.classList.toggle('hidden', cat !== 'best');
+    else if (type === 'strong') card.classList.toggle('hidden', cat !== 'strong');
+    else if (type === 'erp') card.classList.toggle('hidden', !tags.includes('erp'));
+    else if (type === 'azure') card.classList.toggle('hidden', !tags.includes('azure'));
+    else if (type === 'governance') card.classList.toggle('hidden', !tags.includes('governance'));
+  });
+}
+</script>
+</body>
+</html>
